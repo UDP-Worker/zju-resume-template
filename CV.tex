@@ -1,145 +1,66 @@
-\documentclass[11pt]{article}
+\documentclass[11pt,a4paper]{article}
 
-
-\setlength{\parindent}{0pt}
-\usepackage{xltxtra}
-\usepackage{hyperref}
-\hypersetup{hidelinks}
-\usepackage{url}
-\urlstyle{tt}
-\usepackage{xcolor}
-\definecolor{CVBlue}{RGB}{23,110,191}
-\usepackage{calc}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usetikzlibrary{calc}
+% Compile with XeLaTeX. Fonts are bundled for reproducible local/Actions builds.
 \usepackage{fontspec}
 \usepackage{xeCJK}
-\usepackage{enumitem}
-\CJKsetecglue{} %% 取消中文与数字之间的间隙
-
-
-%% 主文档字体设置
-\setmainfont[
-    Path = fonts/Main/,
-    Extension = .otf,
-    BoldFont = texgyretermes-bold.otf, % 加粗字体
-]{texgyretermes-regular.otf} % 正文字体
-
-% 中文字体设置
-\setCJKmainfont[
-    Path = fonts/hansans/,
-    Extension = .ttf,
-    BoldFont = NotoSansSC-Bold.ttf, % 加粗字体
-]{NotoSansSC-Regular.otf} % 正文字体
-
-
-\usepackage{relsize}
-\usepackage{xspace}
-
-% 使用 fontawesome（部分图标）
-\usepackage{fontawesome} 
-
-% A4纸，上下左右边距
-\usepackage[
-    a4paper,
-    left=1.2cm,
-    right=1.2cm,
-    top=1.5cm,
-    bottom=1cm,
-    nohead
-]{geometry}
-
-\renewcommand{\baselinestretch}{1.5} % 行间距设为1.5
-
+\setmainfont[Path=fonts/Main/,BoldFont=texgyretermes-bold.otf]{texgyretermes-regular.otf}
+\setCJKmainfont[Path=fonts/hansans/,BoldFont=NotoSansSC-Bold.ttf]{NotoSansSC-Regular.ttf}
+\usepackage[a4paper,left=1.55cm,right=1.55cm,top=1.45cm,bottom=1.45cm]{geometry}
+\usepackage{xcolor}
+\definecolor{CVBlue}{RGB}{26,79,123}
+\definecolor{CVGray}{RGB}{85,85,85}
+\usepackage{hyperref}
+\hypersetup{hidelinks,pdftitle={王弘昊｜个人简历},pdfauthor={王弘昊}}
 \usepackage{titlesec}
-\usepackage{enumitem}
-\setlist{noitemsep} % 取消列表项间的额外间距
-%\setlist{nosep} % 取消所有垂直间距
-\setlist[itemize]{topsep=0.25em, leftmargin=*}
-\setlist[enumerate]{topsep=0.25em, leftmargin=*}
+\usepackage{tabularx}
+\usepackage{needspace}
+\usepackage{setspace}
+\setstretch{1.18}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{1em}
+\pagestyle{empty}
+\raggedbottom
 
-% --- 用于控制【不同项目之间】的垂直距离 ---
-\newlength{\interProjectSpacing}
-\setlength{\interProjectSpacing}{0.9em} % <--- 在此调整项目之间的距离
-\newcommand{\projectsep}{\vspace{\interProjectSpacing}}
-
-% --- 用于控制【项目标题】与下方【项目描述】的距离 ---
-\newlength{\intraProjectTitleSep}
-\setlength{\intraProjectTitleSep}{0.4em} % <--- 在此调整标题和描述的距离
-\newcommand{\titlebreak}{\\[\intraProjectTitleSep]}
-
-% --- 用于控制【项目描述】与下方【要点列表】的距离 ---
-\newlength{\intraProjectListTopSep}
-\setlength{\intraProjectListTopSep}{0.2em} % <--- 在此调整描述和列表的距离
-
-% =======================================================================
-
-
-\titleformat{\section}         % 定制 \section 命令 
-{\large\bfseries\raggedright} % 将 section 标题设置为大号、粗体且左对齐
-{}{0em}                      % 可用于为所有 section 添加前缀（如“章节...”）
-{}                           % 可用于在标题前插入代码
-[{\color{CVBlue}\titlerule}]  % 在标题后插入一条横线
-\titlespacing*{\section}{0cm}{*1.6}{*1.2}
-
-
+\titleformat{\section}{\large\bfseries\color{CVBlue}}{}{0pt}{}[\vspace{1pt}\titlerule]
+\titlespacing*{\section}{0pt}{10pt}{6pt}
+\newcommand{\projectheading}[3]{%
+  \Needspace{6\baselineskip}%
+  \noindent\textbf{#1}\hfill{\small\color{CVGray}#2}\par
+  {\small\color{CVBlue}#3}\par\vspace{1pt}}
+\newcommand{\projectgap}{\vspace{7pt}}
 
 \begin{document}
-\pagenumbering{gobble}
 
-%%%% 利用tikz来定位照片
-\begin{tikzpicture}[remember picture, overlay]
-	\node[anchor = north east] at ($(current page.north east)+(-2cm,-1.2cm)$) {\includegraphics[height=3cm]{avatar.jpg}};
-\end{tikzpicture}%
-%%%% 利用tikz来定位学校Logo，这里只在第一页显示
-\begin{tikzpicture}[remember picture, overlay]
-	\node[anchor = north west] at ($(current page.north west)+(0.5cm,+1.0cm)$) {\includegraphics[height=6cm]{zju.png}};
-\end{tikzpicture}%
-\centerline{\LARGE\bfseries{王弘昊\quad 个人简历}}
+{\fontsize{24}{29}\selectfont\bfseries 王弘昊}\hfill{\large\color{CVGray}个人简历}\par
+\vspace{3pt}
+电话：133-3616-5896\quad 邮箱：\href{mailto:3230100855@zju.edu.cn}{3230100855@zju.edu.cn}
 
-\centerline{\normalsize{\faPhone\ 133-3616-5896 \quad \faEnvelopeO\ \href{mailto:3230100855@zju.edu.cn}{3230100855@zju.edu.cn}}}
+\section{个人情况}
+2023级本科生\quad 竺可桢学院混合班\quad 本博贯通项目\par
+\textbf{平均绩点：4.33}\qquad\textbf{专业排名：2/7}（竺可桢学院）\qquad 英语六级：622
 
-\section{\makebox[\widthof{\faInfo}][c]{\color{CVBlue}\faInfo}\ 个人情况}
-% need help
-竺可桢学院\quad 混合班/光电信息科学与工程专业\quad 本博贯通项目\\
-平均绩点 4.33 英语成绩：六级 622\\
-专业排名 2/7 （竺院单独排序）
-\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育经历}
-\textbf{浙江大学\quad 竺可桢学院\quad 混合班/光电信息科学与工程} \hfill 2023.9 -- 至今 % 标题和正文间加一点距离
+\section{教育经历}
+\textbf{浙江大学\quad 竺可桢学院}\hfill 2023.09 -- 至今\par
+光电信息科学与工程专业\quad 本科\par
+\textbf{相关课程：}最优控制与强化学习（100）、微机原理与接口技术（96）、数字信号处理（95）、概率论与数理统计（93）、机器视觉与图像处理（92）、机器人视觉、多传感器融合与自动驾驶（92）、线性代数（甲）（91）。
 
-相关课程成绩：最优控制与强化学习（100）、微机原理与接口技术（96）、数字信号处理（95）、概率论与数理统计（93）、机器视觉与图像处理（92）、机器人视觉、多传感器融合与自动驾驶（92）、线性代数（甲）（91）
+\section{项目经历}
+\projectheading{主动光学改进的微眼动事件相机}{2025.06 -- 至今}{本博贯通深度科研项目｜独立承担技术路线设计与系统研制｜在研}
+面向事件相机对相对静止边缘响应不足的问题，设计压电驱动的可调液体棱镜替代旋转光楔，以主动微眼动调制增强事件响应，并降低机械旋转带来的功耗与运动误差。\par
+\textbf{器件与光学：}独立完成文献调研、技术路线选择与多物理场耦合仿真，设计并制备柔性主动光学腔；设计缩束—扩束光瞳中继系统，完成配套镜筒与精密装配机构设计。\par
+\textbf{驱动与反馈：}设计高压压电驱动及电荷传感电路，完成嵌入式程序开发与测试，并开展反馈系统、校准与对齐算法设计，统筹光机电系统集成。\par
+\textbf{当前进展：}已完成核心器件制作、电子系统与嵌入式程序测试；初步测试验证了降低功耗与机械误差的效果，正在开展全系统光学组装与测试，成像性能提升有待整机实验验证。
 
-\section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历}
+\projectgap
+\projectheading{可编程光学芯片控制系统设计}{2025.04 -- 2026.06}{省级大学生科研训练项目（SRTP）｜项目负责人｜优秀结题}
+针对可编程光子滤波芯片配置依赖人工经验、实验耗时长的问题，独立开发滤波器设计、参数优化及硬件自动标定程序，并实现激光光源温漂补偿与实验仪器接口。\par
+\textbf{算法与标定：}采用滤波器原型综合与物理极点映射生成初值，结合自动微分和带边界约束的拟牛顿算法（L-BFGS-B）优化器件相位；通过自动扫压、光谱采集与曲线形状匹配，建立控制电压到模型参数的标定映射。\par
+\textbf{实际应用：}系统已用于光电学院谢意维老师课题组的光芯片测试，将典型的6--7小时人工实验流程缩短至约1小时自动测试，项目以\textbf{优秀}成绩结题。
 
-% --- 第一个项目 ---
-% 将标题行末尾的 \\ 替换为 \titlebreak 命令
-\textbf{主动光学改进的微眼动事件相机（本博贯通深度科研项目）} \hfill 2025.06 -- 至今 \titlebreak
-\textbf{项目描述：}在事件相机前加入旋转光楔可诱导光线变化增强其对相对静止边沿的成像能力。本项目自主设计主动光学元件及其控制系统，代替传统机械光楔，提升传感器高速运动时的成像能力，显著降低功耗与机械误差。
-
-\textbf{本人贡献：}作为项目唯一负责人独立完成该项目的文献调研与技术路线选择，多物理场耦合仿真，光学系统设计（缩束-扩束光瞳中继光学系统设计），电子系统设计（高压压电致动器驱动电路、电荷传感电路设计），嵌入式程序设计，机械系统设计（柔性光学腔制备，精密装配辅助机构设计，镜筒设计），反馈系统设计，校准与对齐算法设计。
-
-\textbf{项目进展：}已完成核心柔性主动光学器件的设计与制作、电子系统与嵌入式程序测试，正在进行全系统光学组装与测试。本系统在功耗及降低机械误差上的改进已得到验证，实际成像能力能力上的提升将于近期测试。
-
-% 使用 \projectsep 命令来分隔两个项目
-\projectsep
-
-% --- 第二个项目 ---
-\textbf{可编程光学芯片控制系统设计（省级SRTP项目）} \hfill 2025.04 -- 2026.6 \titlebreak
-\textbf{项目描述：}RAMZI（环辅助马赫-曾德尔干涉仪）是一种高度灵活可配置的光芯片，但是其配置过程高度冗杂且依赖经验。本项目综合使用滤波器分解，l-BFGS优化，硬件在环自动标定，实现全自动的配置与控制系统。
-
-\textbf{本人贡献：}作为项目负责人，负责实现激光光源温漂补偿控制系统，滤波器分解算法，实验室仪器接口。
-
-\textbf{项目进展：}本项目以\textbf{优秀}成绩结题。此控制系统已实际投入光电学院谢意维老师组的光芯片测试工作，将典型的6-7小时人工实验工作压缩至约1小时的自动测试工作。
-
-\projectsep
-
-\textbf{AR-HUD 智能复合弓瞄具} \hfill 2026.03 -- 2026.6 \titlebreak
-\textbf{项目描述：}复合弓的弹道极其弯曲，射手训练难度大。本项目引入AR-HUD现实，融合测距、弹道计算、训练总结，设计出一款智能复合弓训练瞄具。
-
-\textbf{本人贡献：}负责实现电路原理设计、PCB Layout、嵌入式编程、基于机器学习的训练分析等。
-
-\textbf{项目进展：}本项目获全国大学生光电设计竞赛全国二等奖，东部赛区一等奖。
-
+\projectgap
+\projectheading{智能复合弓瞄具}{2026.03 -- 2026.06}{全国大学生光电设计竞赛全国二等奖、东部赛区一等奖}
+面向不同射距下的瞄准补偿与训练反馈需求，融合激光测距、弹道计算与抬头显示，研制智能复合弓训练瞄具。\par
+负责电路原理图与印制电路板设计、嵌入式程序开发及系统集成，并实现基于机器学习的训练分析功能。
 
 \end{document}
